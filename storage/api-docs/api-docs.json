@@ -1,0 +1,613 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Assessment API",
+        "contact": {
+            "email": "ajiferukeolatommy@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Login a user as HR / Director",
+                "description": "Login by email, password",
+                "operationId": "login",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "token"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Register a user as HR / Director",
+                "description": "Register with name, email, password",
+                "operationId": "register",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "ajiferuke tomiwa"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User{}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The email has already been taken."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logs out current logged in user session.",
+                "description": "Logs out user with the logged in token either through the body, params, or Auth_Bearer",
+                "operationId": "logout",
+                "requestBody": {
+                    "description": "Pass user token",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "token"
+                                ],
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYzMzgyNTY4MSwiZXhwIjoxNjMzOTEyMDgxLCJuYmYiOjE2MzM4MjU2ODEsImp0aSI6IlpoZGpHcjJMaDR3NzAwWVYiLCJzdWIiOjEyLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.291_2F7vTE-eIwSiS1DLA692BMLQuFX27VFt84ahons"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": ""
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/refresh?token={token}": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Changes current logged in user session token.",
+                "description": "Logs out and changes the token of the current user.",
+                "operationId": "refresh",
+                "requestBody": {
+                    "description": "Pass user token",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "token"
+                                ],
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYzMzgyNTY4MSwiZXhwIjoxNjMzOTEyMDgxLCJuYmYiOjE2MzM4MjU2ODEsImp0aSI6IlpoZGpHcjJMaDR3NzAwWVYiLCJzdWIiOjEyLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.291_2F7vTE-eIwSiS1DLA692BMLQuFX27VFt84ahons"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "token."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/todos": {
+            "get": {
+                "tags": [
+                    "HR/Director Operations"
+                ],
+                "summary": "Get employees data",
+                "description": "An authenticated user retrieving employees data using his/her ID",
+                "operationId": "index",
+                "parameters": [
+                    {
+                        "name": "Bearer-Token",
+                        "in": "header",
+                        "description": "Set logged in user token",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Employees[]"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "HR/Director Operations"
+                ],
+                "summary": "Update employee data",
+                "description": "An authenticated user update an employee data using his/her ID",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "Bearer-Token",
+                        "in": "header",
+                        "description": "Set logged in user token",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "fullName",
+                                    "professionalQualification",
+                                    "educationDegree",
+                                    "dob",
+                                    "phoneNumber",
+                                    "nextOfKin",
+                                    "maritalStatus",
+                                    "homeAddress"
+                                ],
+                                "properties": {
+                                    "fullName": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Mr. Ajagbe Daniel Edited"
+                                    },
+                                    "professionalQualification": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Professor"
+                                    },
+                                    "educationDegree": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Masters"
+                                    },
+                                    "dob": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "1998/07/03"
+                                    },
+                                    "phoneNumber": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "08023456782"
+                                    },
+                                    "nextOfKin": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Ajagbe Tolani"
+                                    },
+                                    "maritalStatus": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Single"
+                                    },
+                                    "homeAddress": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Baruwa Street"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Employee{}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Oops, the todo could not be updated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "HR/Director Operations"
+                ],
+                "summary": "Add employee data",
+                "description": "An authenticated user add new employee data using his/her ID",
+                "operationId": "store",
+                "parameters": [
+                    {
+                        "name": "Bearer-Token",
+                        "in": "header",
+                        "description": "Set logged in user token",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "fullName",
+                                    "professionalQualification",
+                                    "educationDegree",
+                                    "dob",
+                                    "phoneNumber",
+                                    "nextOfKin",
+                                    "maritalStatus",
+                                    "homeAddress"
+                                ],
+                                "properties": {
+                                    "fullName": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Mr. Ajagbe Daniel Edited"
+                                    },
+                                    "professionalQualification": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Professor"
+                                    },
+                                    "educationDegree": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Masters"
+                                    },
+                                    "dob": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "1998/07/03"
+                                    },
+                                    "phoneNumber": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "08023456782"
+                                    },
+                                    "nextOfKin": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Ajagbe Tolani"
+                                    },
+                                    "maritalStatus": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Single"
+                                    },
+                                    "homeAddress": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Baruwa Street"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Employee{}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Oops, the todo could not be updated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "422": {
+                "description": "Wrong credentials response",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Unauthenticated."
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
